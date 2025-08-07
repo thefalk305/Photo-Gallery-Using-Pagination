@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.innerHTML = `
           <div class="figure-card">
             <div class="image-wrapper">
-              <img src="./img/${photo.pic}" alt="${photo.name}" class="figure-img">
+              <img src="img/${photo.pic}" alt="${photo.name}" class="figure-img">
               <div class="caption">${photo.name}</div>
             </div>
             <figcaption class="bio-text">
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           e.stopPropagation();
           modalName.textContent = photo.name;
           modalBorn.textContent = `Born ${photo.born}`;
-          modalImage.src = `./img/${photo.pic}`;
+          modalImage.src = `img/${photo.pic}`;
           modalImage.alt = photo.name;
           modalBio.innerHTML = `<p>${photo.bioText.replace(/\r?\n/g, '<br>')}</p>`;
           modal.style.display = "flex";
