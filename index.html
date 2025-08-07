@@ -19,11 +19,7 @@
       <img src="img/Banner2.png" style="width: 100%">
     </div>
 
-    <!-- How this script works:
-      This script fetches the 'Top navigation menu' HTML tags from an external file ("./html/NavMenu.html") and injects them into the page at the element with id="nav-menu" (just below this script).
-
-      This allows for easy updates to the 'Top navigation menu' of all other .html files that contain the 'Top navigation menu'.
-    -->
+    <!-- See NavMenu.html for a description of how this script works-->
     <script>
       fetch("./html/NavMenu.html")
         .then(res => res.text())
@@ -40,6 +36,12 @@
       Welcome to the Falkman Family Photo Gallery! Click on any photo to learn more about the family member.
     </p>
 
+      <!-- Top Pagination + Per-Page Selector -->
+    <div class="pagination-controls" style="text-align: center; margin: 20px 0;">
+      <div id="topPagination"></div>
+      <label for="imagesPerPage">Images per page:</label>
+      <input type="number" id="imagesPerPage" min="1" max="100" value="12" style="width: 60px;">        
+    </div>
     <!-- Gallery Container -->
     <div id="photoGallery"></div>
 

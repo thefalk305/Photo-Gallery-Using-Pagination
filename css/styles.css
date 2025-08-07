@@ -313,3 +313,14 @@ h3, h4 {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+.per-page-selector {
+  margin-left: auto;
+}

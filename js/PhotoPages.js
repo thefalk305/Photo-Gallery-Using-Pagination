@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // DOM element references
   const gallery = document.getElementById("photoGallery");
-  const paginationContainer = document.getElementById("pagination");
+  const topPagination = document.getElementById("topPagination");
+  const bottomPagination = document.getElementById("pagination");
+  const perPageInput = document.getElementById("imagesPerPage");
 
   const modal = document.getElementById("bioModal");
   const modalBio = document.querySelector(".modal-bio");
@@ -33,9 +35,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // Pagination setup
-  const perPage = 12;
+  let imagesPerPage = parseInt(perPageInput.value) || 12;
   let currentPage = 1;
-  const totalPages = Math.ceil(enrichedPhotos.length / perPage);
 
   /**
    * Render a specific page of photo cards.
@@ -47,8 +48,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     setTimeout(() => {
       gallery.innerHTML = "";
 
-      const start = (page - 1) * perPage;
-      const end = start + perPage;
+      const start = (page - 1) * imagesPerPage;
+      const end = start + imagesPerPage;
       const pagePhotos = enrichedPhotos.slice(start, end);
 
       pagePhotos.forEach((photo) => {
@@ -107,8 +108,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   /**
    * Generate pagination buttons and next/prev navigation.
    */
-  function createPagination() {
-    paginationContainer.innerHTML = "";
+  function createPagination(container) {
+    container.innerHTML = "";
+
+    const totalPages = Math.ceil(enrichedPhotos.length / imagesPerPage);
 
     // Prev button
     const prevBtn = document.createElement("button");
@@ -119,11 +122,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (currentPage > 1) {
         currentPage--;
         renderPage(currentPage);
-        updateActiveButton();
-        createPagination();
+        updatePagination();
       }
     });
-    paginationContainer.appendChild(prevBtn);
+    container.appendChild(prevBtn);
 
     // Page number buttons
     for (let i = 1; i <= totalPages; i++) {
@@ -135,11 +137,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       btn.addEventListener("click", () => {
         currentPage = i;
         renderPage(currentPage);
-        updateActiveButton();
-        createPagination();
+        updatePagination();
       });
 
-      paginationContainer.appendChild(btn);
+      container.appendChild(btn);
     }
 
     // Next button
@@ -151,26 +152,38 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (currentPage < totalPages) {
         currentPage++;
         renderPage(currentPage);
-        updateActiveButton();
-        createPagination();
+        updatePagination();
       }
     });
-    paginationContainer.appendChild(nextBtn);
+    container.appendChild(nextBtn);
   }
 
   /**
-   * Visually update which page button is active.
+   * Update both top and bottom pagination controls.
    */
-  function updateActiveButton() {
-    document.querySelectorAll(".page-btn").forEach(btn => {
-      btn.classList.remove("active");
-      if (parseInt(btn.textContent) === currentPage) {
-        btn.classList.add("active");
-      }
-    });
+  function updatePagination() {
+    createPagination(topPagination);
+    createPagination(bottomPagination);
   }
+
+  /**
+   * Handle user input for images per page.
+   */
+  let debounceTimer;
+  perPageInput.addEventListener("input", (e) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      const value = parseInt(e.target.value);
+      if (!isNaN(value) && value >= 1 && value <= 100) {
+        imagesPerPage = value;
+        currentPage = 1;
+        renderPage(currentPage);
+        updatePagination();
+      }
+    }, 300);
+  });
 
   // Initial load
   renderPage(currentPage);
-  createPagination();
+  updatePagination();
 });
