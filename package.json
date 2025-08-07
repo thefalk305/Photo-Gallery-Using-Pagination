@@ -1,0 +1,14 @@
+
+{
+  "name": "PhotoPages",
+  "version": "1.0.0",
+  "description": "A simple photo gallery application",
+  "main": "index.js",
+  "scripts": {
+    "build-data": "python py/Excel_to_JSON.py",
+    "build-gallery": "node js/buildPhotoPagesData.js",
+    "build-all": "npm run build-data && npm run build-gallery"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

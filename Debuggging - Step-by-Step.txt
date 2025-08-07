@@ -1,0 +1,35 @@
+Step-by-Step: Debug PhotoPages.js in VSCode
+✅ 1. Serve Your Project Locally
+If you're not already using a local server:
+- Install the Live Server extension in VSCode
+- Right-click your PhotoPages.html → "Open with Live Server"
+- This will launch your site at something like http://127.0.0.1:5500
+
+🛠️ 2. Create a Debug Configuration
+- Open the Run and Debug panel (Ctrl+Shift+D)
+- Click “create a launch.json file”
+- Choose “Chrome” or “Edge” (depending on your browser)
+- Use this config:
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-chrome",
+      "request": "launch",
+      "name": "Debug PhotoPages.js in Chrome",
+      "url": "http://127.0.0.1:5500",
+      "webRoot": "${workspaceFolder}",
+      "breakOnLoad": true
+    }
+  ]
+}
+
+🎯 3. Set Breakpoints
+- Open PhotoPages.js in VSCode
+- Click to the left of any line number to set a breakpoint (e.g. inside your fetch() or modal logic)
+
+▶️ 4. Start Debugging
+- In the Run panel, select “Debug PhotoPages.js in Chrome”
+- Click the green ▶️ button
+- Chrome will launch and attach to VSCode
+- Execution will pause at your breakpoints, and you’ll see variables, call stacks, and scopes

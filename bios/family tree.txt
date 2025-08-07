@@ -1,0 +1,32 @@
+People - information about each person:
+
+WhoID	Unique ID. You can assign these however you like.
+Father	The WhoID of this person's father.
+Mother	The WhoID of this person's mother.
+First	First name.
+Middle	Middle name(s).
+Last	Last name.
+Suff	Jr. etc.
+Sx	M or F.
+Gen	Generation. Assigning someone born around 1800 to Generation 100 works well.
+BMonth	Month of birth.
+BDay	Day of birth.
+BYear	Year of birth.
+BWhere	Place of birth.
+DMonth	Month of death.
+DDay	Day of death.
+DYear	Year of death.
+DWhere	Place of death.
+Buried	Place of burial.
+Memo	Additional information about this person. It can hold very long text, entire articles.
+Marriages - this table links two people from the People table to create a marriage:
+
+Husband	WhoID of husband.
+Wife	WhoID of wife.
+MMonth	Month.
+MDay	Day.
+MYear	Year.
+MWhere	Place.
+Memo	Additional information about this marriage.
+
+from: http://25yearsofprogramming.com/msaccess/famhistmdb.htm

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jerry's Photo Gallery</title>
+
+  <!-- Favicon and stylesheet -->
+  <link rel="icon" href="./assets/favico-t.ico">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!-- Main gallery script -->
+  <script type="module" src="./js/PhotoPages.js"></script>
+</head>
+
+<body>
+  <div id="container">
+
+    <!-- Banner Image -->
+    <div class="Banner">
+      <img src="img/Banner2.png" style="width: 100%">
+    </div>
+
+    <!-- How this script works:
+      This script fetches the 'Top navigation menu' HTML tags from an external file ("./html/NavMenu.html") and injects them into the page at the element with id="nav-menu" (just below this script).
+
+      This allows for easy updates to the 'Top navigation menu' of all other .html files that contain the 'Top navigation menu'.
+    -->
+    <script>
+      fetch("./html/NavMenu.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("nav-menu").innerHTML = html;
+        });
+    </script>
+    <!-- Top navigation menu -->
+    <div id="nav-menu"></div>
+
+    <!-- Gallery Title & Intro -->
+    <h1>My Family Photo Page</h1>
+    <p style="text-align: center">
+      Welcome to the Falkman Family Photo Gallery! Click on any photo to learn more about the family member.
+    </p>
+
+    <!-- Gallery Container -->
+    <div id="photoGallery"></div>
+
+    <!-- Pagination Controls -->
+    <div id="pagination" style="text-align: center; margin-top: 30px;"></div>
+
+    <!-- Modal for Expanded Bio -->
+    <div id="bioModal" class="modal">
+      <div class="modal-content modal-profile">
+
+        <!-- Modal Close Icon -->
+        <span class="modal-close">&times;</span>
+
+        <!-- Modal Header with Name and Birth Info -->
+        <div class="modal-header">
+          <div class="modal-info">
+            <h2 id="modalName"></h2>
+            <h3 id="modalBorn"></h3>
+          </div>
+          <div class="modal-bio-image-wrapper">
+            <img id="modalBioImage" src="" alt="Bio Photo" class="modal-bio-img">
+          </div>
+        </div>
+
+        <!-- Bio Paragraph Content -->
+        <div class="modal-bio"></div>
+
+        <!-- Modal Exit Button -->
+        <button class="modal-exit-btn">Close</button>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
