@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const card = document.createElement("div");
         card.className = "info-card";
 
-        // Create card structure with image and bio preview
         card.innerHTML = `
           <div class="figure-card">
             <div class="image-wrapper">
@@ -72,7 +71,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
         `;
 
-        // Toggle card expansion
         card.addEventListener("click", () => {
           if (card.classList.contains("expanded")) {
             card.classList.remove("expanded");
@@ -82,7 +80,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         });
 
-        // Open modal with full bio
         card.querySelector(".toggle-bio").addEventListener("click", (e) => {
           e.stopPropagation();
           modalName.textContent = photo.name;
@@ -96,7 +93,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         gallery.appendChild(card);
       });
 
-      // Apply fade-in after rendering
       gallery.classList.remove("fade-out");
       gallery.classList.add("fade-in");
       setTimeout(() => {
@@ -106,14 +102,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   /**
-   * Generate pagination buttons and next/prev navigation.
+   * Generate a fresh pagination element.
    */
-  function createPagination(container) {
-    container.innerHTML = "";
+  function generatePaginationElement() {
+    const container = document.createElement("div");
+    container.className = "pagination";
 
     const totalPages = Math.ceil(enrichedPhotos.length / imagesPerPage);
 
-    // Prev button
     const prevBtn = document.createElement("button");
     prevBtn.textContent = "← Prev";
     prevBtn.className = "nav-btn";
@@ -127,7 +123,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     container.appendChild(prevBtn);
 
-    // Page number buttons
     for (let i = 1; i <= totalPages; i++) {
       const btn = document.createElement("button");
       btn.textContent = i;
@@ -143,7 +138,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.appendChild(btn);
     }
 
-    // Next button
     const nextBtn = document.createElement("button");
     nextBtn.textContent = "Next →";
     nextBtn.className = "nav-btn";
@@ -156,14 +150,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
     container.appendChild(nextBtn);
+
+    return container;
   }
 
   /**
    * Update both top and bottom pagination controls.
    */
   function updatePagination() {
-    createPagination(topPagination);
-    createPagination(bottomPagination);
+    if (topPagination) {
+      topPagination.innerHTML = "";
+      topPagination.appendChild(generatePaginationElement());
+    }
+
+    if (bottomPagination) {
+      bottomPagination.innerHTML = "";
+      bottomPagination.appendChild(generatePaginationElement());
+    }
   }
 
   /**
